@@ -1,6 +1,6 @@
 (set-env!
 	:source-paths #{"src" "content"}
-  :asset-paths  #{ "js"}
+  ;; :resource-paths  #{"js"}
   :dependencies '[[perun "0.4.2-SNAPSHOT" :scope "test"]
                   [adzerk/boot-cljs "2.1.4" :scope "test"]
                   [pandeiro/boot-http "0.8.3" :exclusions [org.clojure/clojure]]
@@ -12,31 +12,45 @@
          '[org.martinklepsch.boot-garden :refer [garden]]
          '[adzerk.boot-cljs :refer [cljs]])
 
+
 (deftask build
   "Build my project."
   []
   (comp (p/global-metadata :filename "base.meta.edn")
-     (p/markdown)
-     (p/render         :renderer 'site.post/render)
-     (p/collection     :renderer 'site.core/render)
-     (p/inject-scripts :scripts  #{"index.js"})))
+     (p/markdown       :out-dir "app")
+     (p/render         :out-dir "app" :renderer 'site.post/render)
+     (p/collection     :out-dir "app" :renderer 'site.core/render)
+     #_(p/inject-scripts :scripts  #{"index.js"})))
+
+
+(deftask gen-js
+  "Generate JS files using CLJS"
+  []
+  (comp (cljs
+      :source-map true
+      :optimizations :advanced)))
+
 
 (deftask gen-css
   "Generate CSS from Garden and watch for future changes"
   []
   (comp (garden
       :styles-var 'site.garden-styles.index/base
-      :output-to "./public/index.css")))
+      :output-to "./app/index.css")))
+
 
 (deftask dev
   []
   (comp (watch)
      (build)
      (gen-css)
-     (serve :resource-root "public")))
+     (gen-js)
+     (serve :resource-root "app")))
+
 
 (deftask prod
   []
-  (comp (gen-css)
-     (build)
+  (comp (build)
+     (gen-css)
+     (gen-js)
      (target)))
