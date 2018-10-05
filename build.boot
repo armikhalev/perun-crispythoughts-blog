@@ -5,6 +5,7 @@
                   [adzerk/boot-cljs "2.1.4" :scope "test"]
                   [pandeiro/boot-http "0.8.3" :exclusions [org.clojure/clojure]]
                   [org.martinklepsch/boot-garden "1.3.2-1"]
+                  [prismatic/dommy "1.1.0"]
                   [hiccup "1.0.5" :exclusions [org.clojure/clojure]]])
 
 (require '[io.perun :as p]

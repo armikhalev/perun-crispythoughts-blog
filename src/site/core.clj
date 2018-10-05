@@ -13,11 +13,12 @@
    [:body#container
     [:h1 "List of My Posts"]
     [:button#sort-by-date  "Sort by date"]
-    [:ul
+    [:ul#list-items
      (for [post posts]
        [:li
         [:a
-         {:href (:permalink post)}
+         {:href (:permalink post)
+          :data-key (:date post)}
          (:title post)]])]]
 
    ;; scripts

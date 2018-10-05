@@ -1,7 +1,7 @@
 ---
 title:  My notes on WebDevelopment
 layout: post
-date:   03-29-2016
+date:   2016.03.29
 ---
 
 Tables.

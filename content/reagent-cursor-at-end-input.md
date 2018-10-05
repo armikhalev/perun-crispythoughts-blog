@@ -1,7 +1,7 @@
 ---
 title:  Reagent how to place cursor at end of text in text input element
 layout: post
-date:   08-04-2018
+date:   2018.08.04
 tags:
   - Clojure
   - Reframe

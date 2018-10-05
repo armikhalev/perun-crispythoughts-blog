@@ -1,6 +1,6 @@
 ---
 title:  SASS – best practices
-date:   08-05-2017
+date:   2017.08.05
 layout: post
 ---
 
