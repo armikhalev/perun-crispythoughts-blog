@@ -12,14 +12,19 @@
     [:meta {:name "viewport" :content "width=device-width, initial-scale=1.0, user-scalable=no"}]]
    [:body#container
     [:h1 "List of My Posts"]
-    [:button#sort-by-date  "Sort by date"]
+
+    [:button#sort-by-date  "Sort by date"
+     [:span#order-arrow
+      {:data-state "down"}
+      " &darr;"]]
+
     [:ul#list-items
      (for [post posts]
        [:li
+        {:data-key (:date post)}
         [:a
-         {:href (:permalink post)
-          :data-key (:date post)}
-         (:title post)]])]]
+         {:href (:permalink post)}
+         (str (:date post) " - " (:title post))]])]]
 
    ;; scripts
    (hp/include-js "main.js")))
