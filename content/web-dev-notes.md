@@ -2,6 +2,10 @@
 title:  My notes on WebDevelopment
 layout: post
 date:   2016.03.29
+tags:
+  - html
+  - tables
+  - web development
 ---
 
 Tables.

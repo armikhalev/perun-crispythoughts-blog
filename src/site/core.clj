@@ -1,5 +1,6 @@
 (ns site.core
-  (:require [hiccup.page :as hp]))
+  (:require [hiccup.page :as hp]
+            [clojure.string :as clj-str]))
 
 (defn render [{global-meta :meta posts :entries}]
   (hp/html5
@@ -13,18 +14,24 @@
    [:body#container
     [:h1 "List of My Posts"]
 
-    [:button#sort-by-date  "Sort by date"
-     [:span#order-arrow
-      {:data-state "down"}
-      " &darr;"]]
+    [:div.search-fns
+     [:button#sort-by-date  "Sort by date"
+      [:span#order-arrow
+       {:data-state "down"}
+       " &darr;"]]
+
+     [:div
+      [:label "Search by tag: "]
+      [:input#search-by-tag ]]]
 
     [:ul#list-items
      (for [post posts]
        [:li
-        {:data-key (:date post)}
+        {:data-key  (:date post)
+         :data-tags (clj-str/join ", " (:tags post))}
         [:a
          {:href (:permalink post)}
-         (str (:date post) " - " (:title post))]])]]
+         (str (:date post) " - " (:title post) " | TAGS -> " (clj-str/join ", " (:tags post)))]])]]
 
    ;; scripts
    (hp/include-js "main.js")))

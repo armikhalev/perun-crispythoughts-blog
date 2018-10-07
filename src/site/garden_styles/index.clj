@@ -3,9 +3,13 @@
             [garden.stylesheet :refer [rule]]))
 
 (defstyles base
-  (let [body (rule :body)]
-    (body
-     {:font-family "Helvetica Neue"
-      :font-size   "16px"
-      :background  "none"
-      :line-height 1.5})))
+  [:.search-fns
+   {:display "flex"
+    :width "50%"
+    :justify-content "space-between"}]
+
+  [:#sort-by-date
+   {:width "200px"}]
+
+  [:#search-by-tag
+   {:width "200px"}] )

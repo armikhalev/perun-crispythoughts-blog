@@ -2,6 +2,9 @@
 title:  SASS – best practices
 date:   2017.08.05
 layout: post
+tags:
+  - Sass
+  - Css
 ---
 
 SASS is a wonderful tool for managing your CSS files as it gives us variables, mixins and all other goodies.
