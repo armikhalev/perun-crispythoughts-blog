@@ -30,31 +30,31 @@
 
 (defn on-keyup
   [search-by-tag
-   list-items]
+   list-items
+   atom-list-items]
 
-  (let [link-anchors (sel [list-items :li])
+  (let [link-anchors @atom-list-items
         value (dom/value search-by-tag)]
-    (js-log 
-     (filter
-      #(re-find
-        (re-pattern value)
-         (dom/attr % :data-tags))
-      link-anchors))))
+    (do (dom/clear! list-items)
+        (->> link-anchors
+             (filter
+              #(re-find
+                (re-pattern value)
+                (dom/attr % :data-tags)))
+             clj->js
+             (map #(dom/append! list-items %))
+             clj->js))))
 
-;; (let [key-search-by (if (= lang "English") :word :la)]
-;;   (filter
-;;    #(re-find
-;;      (re-pattern (sanitize-input word))
-;;      (key-search-by %))
-;;    dict)))
+
+(defonce atom-list-items (atom (sel [:#list-items :li])))
 
 
 (defn main []
-  (let [button        (sel1 :#sort-by-date)
-        list-items    (sel1 :#list-items)
-        order-arrow   (sel1 :#order-arrow)
-        arrow-state   (atom (dom/attr order-arrow :data-state))
-        search-by-tag (sel1 :#search-by-tag)]
+  (let [button          (sel1 :#sort-by-date)
+        list-items      (sel1 :#list-items)
+        order-arrow     (sel1 :#order-arrow)
+        arrow-state     (atom (dom/attr order-arrow :data-state))
+        search-by-tag   (sel1 :#search-by-tag)]
 
     (dom/listen! button
                  :click
@@ -67,4 +67,5 @@
                  :keyup
                  #(on-keyup,
                    search-by-tag
-                   list-items))))
+                   list-items
+                   atom-list-items))))
