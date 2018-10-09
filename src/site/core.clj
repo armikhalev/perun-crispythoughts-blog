@@ -30,7 +30,7 @@
         {:data-key  (:date post)
          :data-tags (clj-str/join ", " (:tags post))}
         [:a
-         {:href (:permalink post)}
+         {:href (str "./posts/"(:filename post))}
          (str (:date post) " - " (:title post) " | TAGS -> " (clj-str/join ", " (:tags post)))]])]]
 
    ;; scripts

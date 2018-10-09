@@ -18,9 +18,9 @@
   "Build my project."
   []
   (comp (p/global-metadata :filename "base.meta.edn")
-     (p/markdown       :out-dir "app")
+     (p/markdown       :out-dir "posts")
      (p/render         :out-dir "app" :renderer 'site.post/render)
-     (p/collection     :out-dir "app" :renderer 'site.core/render)
+     (p/collection     :out-dir "app" :renderer 'site.core/render :page "index.html")
      #_(p/inject-scripts :scripts  #{"index.js"})))
 
 
