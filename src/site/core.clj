@@ -2,7 +2,9 @@
   (:require [hiccup.page :as hp]
             [clojure.string :as clj-str]))
 
-(defn render [{global-meta :meta posts :entries}]
+(defn render [{global-meta :meta
+               posts       :entries}]
+
   (hp/html5
    {:lang "en" :itemtype "http://schema.org/Blog"}
    [:head
@@ -17,8 +19,16 @@
     [:div.search-fns
      [:button#sort-by-date  "Sort by date"
       [:span#order-arrow
-       {:data-state "down"}
+       {:data-state "up"}
        " &darr;"]]
+
+     [:div
+      [:ul
+       (for [post posts]
+         [:li
+          [:a
+           {:href (str (:tag post) ".html")}
+           (:tag post)]])]]
 
      [:div
       [:label "Search by tag: "]

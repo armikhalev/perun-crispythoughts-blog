@@ -28,9 +28,9 @@ if(cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2((cljs.core.deref.cljs$core$IFn$_
 }
 
 if(cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2((cljs.core.deref.cljs$core$IFn$_invoke$arity$1 ? cljs.core.deref.cljs$core$IFn$_invoke$arity$1(arrow_state) : cljs.core.deref.call(null,arrow_state)),"down")){
-return dommy.core.set_html_BANG_(order_arrow," &darr;");
-} else {
 return dommy.core.set_html_BANG_(order_arrow," &uarr;");
+} else {
+return dommy.core.set_html_BANG_(order_arrow," &darr;");
 }
 });
 app.core.on_keyup = (function app$core$on_keyup(search_by_tag,list_items,atom_list_items){

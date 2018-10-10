@@ -24,8 +24,8 @@
           (reset! arrow-state "up")
           (reset! arrow-state "down"))
         (if (= @arrow-state "down")
-          (dom/set-html! order-arrow " &darr;")
-          (dom/set-html! order-arrow " &uarr;")))))
+          (dom/set-html! order-arrow " &uarr;")
+          (dom/set-html! order-arrow " &darr;")))))
 
 
 (defn on-keyup
