@@ -1,4 +1,5 @@
 {:base-url "http://cryspithoughts.com/"
+ :doc-root "app"
  :site-title "CT"
  :description "Here I will write about my discoveries in everything what I encounter and what I find to be interesting and useful. This blog must be regarded as a diary or a notebook of everything what I have learned, studied, experienced. Hopefully, my posts would be useful to others as well.
 

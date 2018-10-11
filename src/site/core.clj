@@ -25,10 +25,11 @@
      [:div
       [:ul
        (for [post posts]
-         [:li
-          [:a
-           {:href (str (:tag post) ".html")}
-           (:tag post)]])]]
+         (when (:tag post)
+           [:li
+            [:a
+             {:href (:permalink post)}
+             (:tag post)]]))]]
 
      [:div
       [:label "Search by tag: "]
@@ -36,12 +37,13 @@
 
     [:ul#list-items
      (for [post posts]
-       [:li
-        {:data-key  (:date post)
-         :data-tags (clj-str/join ", " (:tags post))}
-        [:a
-         {:href (str "./posts/"(:filename post))}
-         (str (:date post) " - " (:title post) " | TAGS -> " (clj-str/join ", " (:tags post)))]])]]
+       (when (= "post" (:layout post))
+         [:li
+          {:data-key  (:date post)
+           :data-tags (clj-str/join ", " (:tags post))}
+          [:a
+           {:href (:permalink post)}
+           (str (:date post) " - " (:title post) " | TAGS -> " (clj-str/join ", " (:tags post)))]]))]]
 
    ;; scripts
    (hp/include-js "main.js")))

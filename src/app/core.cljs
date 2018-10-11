@@ -34,13 +34,13 @@
    atom-list-items]
 
   (let [link-anchors @atom-list-items
-        value (dom/value search-by-tag)]
+        value (.toLowerCase (dom/value search-by-tag))]
     (do (dom/clear! list-items)
         (->> link-anchors
              (filter
               #(re-find
                 (re-pattern value)
-                (dom/attr % :data-tags)))
+                (.toLowerCase (dom/attr % :data-tags))))
              clj->js
              (map #(dom/append! list-items %))
              clj->js))))
