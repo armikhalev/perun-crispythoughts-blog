@@ -16,6 +16,14 @@
    [:body#container
     [:h1 "List of My Posts"]
 
+    [:section
+     (for [post posts]
+       (when (:tag post)
+         [:p
+          [:a
+           {:href (:permalink post)}
+           (:tag post)]]))]
+
     [:div.search-fns
      [:button#sort-by-date  "Sort by date"
       [:span#order-arrow
@@ -23,17 +31,9 @@
        " &darr;"]]
 
      [:div
-      [:ul
-       (for [post posts]
-         (when (:tag post)
-           [:li
-            [:a
-             {:href (:permalink post)}
-             (:tag post)]]))]]
-
-     [:div
       [:label "Search by tag: "]
       [:input#search-by-tag ]]]
+
 
     [:ul#list-items
      (for [post posts]

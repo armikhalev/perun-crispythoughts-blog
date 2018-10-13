@@ -33,6 +33,7 @@
    list-items
    atom-list-items]
 
+  ;; TODO sanitize input
   (let [link-anchors @atom-list-items
         value (.toLowerCase (dom/value search-by-tag))]
     (do (dom/clear! list-items)
@@ -47,7 +48,6 @@
 
 
 (defonce atom-list-items (atom (sel [:#list-items :li])))
-
 
 (defn main []
   (let [button          (sel1 :#sort-by-date)
