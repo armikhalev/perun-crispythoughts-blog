@@ -28,26 +28,35 @@
           (dom/set-html! order-arrow " &darr;")))))
 
 
+(defn sanitize-input
+  "Ensures that `input` string is alphanumeric, apostroph, dash or space.
+  Otherwise returns empty string."
+  [input]
+  (let [sanitized (re-find #"[a-zA-Z0-9'-]*\s*[a-zA-Z0-9'-]*" input)]
+    (if (some? sanitized)
+      sanitized
+      "")))
+
+
 (defn on-keyup
   [search-by-tag
    list-items
    atom-list-items]
 
   (let [link-anchors @atom-list-items
-        value (dom/value search-by-tag)]
+        value (.toLowerCase (sanitize-input (dom/value search-by-tag)))]
     (do (dom/clear! list-items)
         (->> link-anchors
              (filter
               #(re-find
                 (re-pattern value)
-                (dom/attr % :data-tags)))
+                (.toLowerCase  (dom/attr % :data-tags))))
              clj->js
              (map #(dom/append! list-items %))
              clj->js))))
 
 
 (defonce atom-list-items (atom (sel [:#list-items :li])))
-
 
 (defn main []
   (let [button          (sel1 :#sort-by-date)

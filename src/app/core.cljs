@@ -43,7 +43,6 @@
    list-items
    atom-list-items]
 
-  ;; TODO sanitize input
   (let [link-anchors @atom-list-items
         value (.toLowerCase (sanitize-input (dom/value search-by-tag)))]
     (do (dom/clear! list-items)

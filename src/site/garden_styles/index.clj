@@ -3,13 +3,22 @@
             [garden.stylesheet :refer [rule]]))
 
 (defstyles base
-  [:.search-fns
-   {:display "flex"
-    :width "50%"
-    :justify-content "space-between"}]
+  [:#main
+   {:margin "0px 10%"}]
 
-  [:#sort-by-date
-   {:width "200px"}]
+  [:.text-center
+   {:text-align "center"}]
 
   [:#search-by-tag
-   {:width "200px"}] )
+   {:width      "100%"
+    :padding    "6px 0px"
+    :text-align "center"}]
+
+  [:section
+   {:padding-top "10px"}]
+
+  [:#sort-by-date
+   {:padding       "5px 10px"
+    :border-radius "4px"}]
+
+   )
