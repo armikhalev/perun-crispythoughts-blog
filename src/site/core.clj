@@ -22,11 +22,6 @@
 
     [:section
 
-     [:button#sort-by-date  "Sort by date"
-      [:span#order-arrow
-       {:data-state "up"}
-       " &darr;"]]
-
      [:ul#list-items
       (for [post posts]
         (when (= "post" (:layout post))
@@ -35,15 +30,25 @@
             :data-tags (clj-str/join ", " (:tags post))}
            [:a
             {:href (:permalink post)}
-            (str (:date post) " - " (:title post) " | TAGS -> " (clj-str/join ", " (:tags post)))]]))]]
+            (str (:date post) " - " (:title post) " | TAGS -> " (clj-str/join ", " (:tags post)))]]))]
 
-    [:aside
+     [:button#sort-by-date
+      [:span#order-arrow
+       {:data-state "up"
+        :title      "Sort by date"}
+       " &darr;"]]]
+
+    [:aside#tags
      (for [post posts]
        (when (:tag post)
-         [:p
+         [:p.tag
           [:a
            {:href (:permalink post)}
            (:tag post)]]))]
+
+    [:button#tags-button
+     {:data-state "closed"}
+     "Tags"]
     ]
 
    ;; scripts
