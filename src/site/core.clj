@@ -12,9 +12,10 @@
     [:title (:site-title global-meta)]
     [:meta {:charset "utf-8"}]
     [:meta {:http-equiv "X-UA-Compatible" :content "IE=edge,chrome=1"}]
-    [:meta {:name "viewport" :content "width=device-width, initial-scale=1.0, user-scalable=no"}]]
-   [:body#main
-    [:h1.text-center "List of My Posts"]
+    [:meta {:name "viewport" :content "width=device-width, initial-scale=1.0, user-scalable=no"}]
+    [:link {:href "https://fonts.googleapis.com/css?family=Fira+Sans" :rel "stylesheet"}]]
+   [:body.main
+    [:h1.main-header.text-center "List of My Posts"]
 
     [:input#search-by-tag
      {:placeholder  "Search by tag..."}]
@@ -30,7 +31,8 @@
             :data-tags (clj-str/join ", " (:tags post))}
            [:a
             {:href (:permalink post)}
-            (str (:date post) " - " (:title post) " | TAGS -> " (clj-str/join ", " (:tags post)))]]))]
+            (str (:date post) ": " (:title post))
+            [:span.tags (str "(" (clj-str/join ", " (:tags post)) ")")]]]))]
 
      [:button#sort-by-date
       [:span#order-arrow
@@ -48,6 +50,7 @@
 
     [:button#tags-button
      {:data-state "closed"}
+     [:span "All"]
      "Tags"]
     ]
 
