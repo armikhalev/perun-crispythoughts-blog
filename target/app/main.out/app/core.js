@@ -60,6 +60,9 @@ return cljs.core.re_find(cljs.core.re_pattern(value),dommy.core.attr(p1__12907_S
 });})(link_anchors,value))
 ,link_anchors))));
 });
+app.core.on_tags_button_click = (function app$core$on_tags_button_click(tags){
+return dommy.core.toggle_BANG_.cljs$core$IFn$_invoke$arity$1(tags);
+});
 if(typeof app.core.atom_list_items !== 'undefined'){
 } else {
 app.core.atom_list_items = (function (){var G__12909 = dommy.utils.__GT_Array(document.querySelectorAll("#list-items li"));
@@ -74,15 +77,25 @@ var arrow_state = (function (){var G__12911 = dommy.core.attr(order_arrow,cljs.c
 return (cljs.core.atom.cljs$core$IFn$_invoke$arity$1 ? cljs.core.atom.cljs$core$IFn$_invoke$arity$1(G__12911) : cljs.core.atom.call(null,G__12911));
 })();
 var search_by_tag = document.getElementById("search-by-tag");
-dommy.core.listen_BANG_.cljs$core$IFn$_invoke$arity$variadic(button,cljs.core.array_seq([cljs.core.cst$kw$click,((function (button,list_items,order_arrow,arrow_state,search_by_tag){
+var tags_button = document.getElementById("tags-button");
+var aside_tags = document.querySelector("aside#tags");
+dommy.core.hide_BANG_(aside_tags);
+
+dommy.core.listen_BANG_.cljs$core$IFn$_invoke$arity$variadic(button,cljs.core.array_seq([cljs.core.cst$kw$click,((function (button,list_items,order_arrow,arrow_state,search_by_tag,tags_button,aside_tags){
 return (function (){
 return app.core.on_click(list_items,order_arrow,arrow_state);
-});})(button,list_items,order_arrow,arrow_state,search_by_tag))
+});})(button,list_items,order_arrow,arrow_state,search_by_tag,tags_button,aside_tags))
 ], 0));
 
-return dommy.core.listen_BANG_.cljs$core$IFn$_invoke$arity$variadic(search_by_tag,cljs.core.array_seq([cljs.core.cst$kw$keyup,((function (button,list_items,order_arrow,arrow_state,search_by_tag){
+dommy.core.listen_BANG_.cljs$core$IFn$_invoke$arity$variadic(tags_button,cljs.core.array_seq([cljs.core.cst$kw$click,((function (button,list_items,order_arrow,arrow_state,search_by_tag,tags_button,aside_tags){
+return (function (){
+return app.core.on_tags_button_click(aside_tags);
+});})(button,list_items,order_arrow,arrow_state,search_by_tag,tags_button,aside_tags))
+], 0));
+
+return dommy.core.listen_BANG_.cljs$core$IFn$_invoke$arity$variadic(search_by_tag,cljs.core.array_seq([cljs.core.cst$kw$keyup,((function (button,list_items,order_arrow,arrow_state,search_by_tag,tags_button,aside_tags){
 return (function (){
 return app.core.on_keyup(search_by_tag,list_items,app.core.atom_list_items);
-});})(button,list_items,order_arrow,arrow_state,search_by_tag))
+});})(button,list_items,order_arrow,arrow_state,search_by_tag,tags_button,aside_tags))
 ], 0));
 });

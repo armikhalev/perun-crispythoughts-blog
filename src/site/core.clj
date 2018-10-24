@@ -15,7 +15,13 @@
     [:meta {:name "viewport" :content "width=device-width, initial-scale=1.0, user-scalable=no"}]
     [:link {:href "https://fonts.googleapis.com/css?family=Fira+Sans" :rel "stylesheet"}]]
    [:body.main
-    [:h1.main-header.text-center "List of My Posts"]
+    [:header
+     [:a
+      {:href "about.html"}
+      [:span        "Crispy "]
+      [:span.bold   "Thoughts"]]]
+
+    [:h1.main-header.text-center "All Posts"]
 
     [:input#search-by-tag
      {:placeholder  "Search by tag..."}]
@@ -51,8 +57,7 @@
     [:button#tags-button
      {:data-state "closed"}
      [:span "All"]
-     "Tags"]
-    ]
+     "Tags"]]
 
    ;; scripts
    (hp/include-js "main.js")))

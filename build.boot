@@ -21,7 +21,8 @@
      (p/markdown        :out-dir "posts")
      (p/render          :out-dir "app" :renderer 'site.post/render)
      (p/tags            :out-dir "app" :renderer 'site.tags/render)
-     (p/collection      :out-dir "app" :renderer 'site.core/render :page "index.html")))
+     (p/collection      :out-dir "app" :renderer 'site.core/render :page "index.html")
+     (p/static          :out-dir "app" :renderer 'site.about/render :page "about.html")))
 
 
 (deftask gen-js

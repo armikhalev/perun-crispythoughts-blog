@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html itemtype="http://schema.org/Blog" lang="en"><head><title>CT | SASS – best practices</title><meta charset="utf-8"><meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible"><meta content="width=device-width, initial-scale=1.0, user-scalable=no" name="viewport"></head><body><h1>SASS – best practices</h1><div><p>SASS is a wonderful tool for managing your CSS files as it gives us variables, mixins and all other goodies. Here is my way of utilizing SASS features in the most effective way. I don’t claim it is the only way but it is a good start for anyone who wants to manage styles wisely.</p>
+<html itemtype="http://schema.org/Blog" lang="en"><head><link href="../index.css" rel="stylesheet" type="text/css"><title>CT | SASS – best practices</title><meta charset="utf-8"><meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible"><meta content="width=device-width, initial-scale=1.0, user-scalable=no" name="viewport"><link href="https://fonts.googleapis.com/css?family=Fira+Sans" rel="stylesheet"></head><body class="main"><h1 class="main-header">SASS – best practices</h1><main class="content"><p>SASS is a wonderful tool for managing your CSS files as it gives us variables, mixins and all other goodies. Here is my way of utilizing SASS features in the most effective way. I don’t claim it is the only way but it is a good start for anyone who wants to manage styles wisely.</p>
 <p>Here we go:</p>
 <p>1) Having just one css file after compiling means only one call to the server, which gives us the best performance and lightness of our app. So there should be just one non-partial .sass/.scss file, where I put all the imports from partial files. Notice that in index.scss file there shouldn’t be anything except @imports;</p>
 <p>For example, here is the file tree structure of a simple app:</p>
@@ -42,4 +42,4 @@
 <p><a href="https://github.com/armikhalev/artist-website-react/tree/master/artist-website/src/styles/sass">https://github.com/armikhalev/artist-website-react/tree/master/artist-website/src/styles/sass</a></p>
 <p>This approach is great for functional programming style (think React.js, Vue.js) as it uses composition instead of inheritance.</p>
 <p>Happy coding!</p>
-</div><h2><a href="/">Back Home</a></h2></body></html>
+</main><h2><a href="/">Back Home</a></h2></body></html>

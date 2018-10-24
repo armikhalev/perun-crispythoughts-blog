@@ -56,6 +56,11 @@
              clj->js))))
 
 
+(defn on-tags-button-click
+  [tags]
+  (dom/toggle! tags))
+
+
 (defonce atom-list-items (atom (sel [:#list-items :li])))
 
 (defn main []
@@ -63,7 +68,11 @@
         list-items      (sel1 :#list-items)
         order-arrow     (sel1 :#order-arrow)
         arrow-state     (atom (dom/attr order-arrow :data-state))
-        search-by-tag   (sel1 :#search-by-tag)]
+        search-by-tag   (sel1 :#search-by-tag)
+        tags-button     (sel1 :#tags-button)
+        aside-tags      (sel1 :aside#tags)]
+
+    (dom/hide! aside-tags)
 
     (dom/listen! button
                  :click
@@ -71,6 +80,11 @@
                    list-items
                    order-arrow
                    arrow-state))
+
+    (dom/listen! tags-button
+                 :click
+                 #(on-tags-button-click,
+                   aside-tags))
 
     (dom/listen! search-by-tag
                  :keyup

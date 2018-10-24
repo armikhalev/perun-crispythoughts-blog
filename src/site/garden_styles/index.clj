@@ -4,10 +4,35 @@
             [garden.selectors :as gs]
             [garden.stylesheet :as gsheet]))
 
+;; Vars
+
+(def font-size (u/px 19))
+
+
+;; Styles
+
 (defstyles base
+  [:header
+   {:font-size  (u/px 34)
+    :margin-top "1em"}
+
+   [:a
+    {:text-decoration "none"
+     :color      "black"}
+
+    [:&.back-home
+     {:color  "darkgoldenrod"}]
+
+    [:.bold
+     {:font-weight "bold"}]]]
+
   [:.main
    {:margin "0px 10%"
     :font-family "Fira Sans"}]
+
+  [:main.content
+   {:font-size   font-size
+    :line-height "27px"}]
 
   [:.main-header
    {:color "#bb883d"}]
@@ -28,7 +53,8 @@
 
   [:button
    {:outline       "none"
-    :background    "#d6b98e"}
+    :background    "#d6b98e"
+    :cursor        "pointer"}
 
    [:&#sort-by-date
     {:padding       "5px 10px"
@@ -75,6 +101,7 @@
 
     [:a
      {:color           "#000000db"
+      :font-size       font-size
       :text-decoration "none"}
 
      [:span.tags
@@ -86,9 +113,7 @@
     {:color       "#FF9800"
      }]]
 
-  [:main.content
-   {:font-size   "19px"
-    :line-height "27px"}]
+  
 
   (gsheet/at-media
    {:min-width (u/px 600)}
@@ -102,6 +127,12 @@
       :border-radius "4px"}]
 
     [:&#tags-button
-     {:top           "7%"}]])
+     {:top           (u/px 66)}]])
+
+  (gsheet/at-media
+   {:min-width (u/px 900)}
+
+   [:section
+    {:justify-content "center"}])
 )
 
