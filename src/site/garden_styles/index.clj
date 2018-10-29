@@ -20,15 +20,22 @@
     {:text-decoration "none"
      :color      "black"}
 
-    [:&.back-home
-     {:color  "darkgoldenrod"}]
-
     [:.bold
      {:font-weight "bold"}]]]
 
+  [:.tag-link
+   [:a
+    {:color "#000000db"}]]
+
   [:.main
    {:margin "0px 10%"
-    :font-family "Fira Sans"}]
+    :font-family "Fira Sans"}
+
+   [:a
+    {:text-decoration "none"}
+
+    [:a.back-home
+     {:color  "darkgoldenrod"}]]]
 
   [:main.content
    {:font-size   font-size
@@ -88,12 +95,16 @@
     :aling-items    "center"
     }]
 
-  [:p.tag
+  [:.tag
    {:width        "23px"
     :padding      "5px"
     :border       "2px solid orange"
     :border-right "0px"
-    :border-top   "0px"}]
+    :border-top   "0px"}
+
+   [:a
+    {:text-decoration "none"
+     :color           "dimgray"}]]
 
   [:ul#list-items
    [:li
@@ -113,7 +124,6 @@
     {:color       "#FF9800"
      }]]
 
-  
 
   (gsheet/at-media
    {:min-width (u/px 600)}

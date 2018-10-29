@@ -16,4 +16,4 @@
           [:h1.main-header (:title post)]
           [:main.content (:content post)]
           [:h2
-           [:a {:href "/"} "Back Home"]]]))
+           [:a.back-home {:href "/"} "↢ Back Home"]]]))
