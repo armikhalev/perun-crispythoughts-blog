@@ -57,7 +57,19 @@
     [:button#tags-button
      {:data-state "closed"}
      [:span "All"]
-     "Tags"]]
+     "Tags"]
+
+    [:footer
+     [:div "Built by Sen Mikhalev with: "]
+     [:span [:a {:href "https://github.com/clojure/clojurescript"} "Clojure(Script)"]]
+     [:span ", "]
+     [:span [:a {:href "https://github.com/hashobject/perun"} "Perun"]]
+     [:span ", "]
+     [:span [:a {:href "https://github.com/boot-clj/boot"} "Boot"]]
+     [:span ", "]
+     [:span [:a {:href "https://github.com/noprompt/garden"} "Garden"]]
+     [:span " and "]
+     [:span [:a {:href "https://github.com/plumatic/dommy"} "Dommy"]]]]
 
    ;; scripts
    (hp/include-js "main.js")))

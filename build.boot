@@ -22,6 +22,7 @@
      (p/render          :out-dir "app" :renderer 'site.post/render)
      (p/tags            :out-dir "app" :renderer 'site.tags/render)
      (p/collection      :out-dir "app" :renderer 'site.core/render :page "index.html")
+     (p/highlight)
      (p/static          :out-dir "app" :renderer 'site.about/render :page "about.html")))
 
 

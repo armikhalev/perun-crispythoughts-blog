@@ -21,4 +21,16 @@
 
            There won’t be many words, only the useful and important information."]
           [:h2
-           [:a.back-home {:href "/"} "↢ Back Home"]]]))
+           [:a.back-home {:href "/"} "↢ Back Home"]]
+
+          [:footer
+           [:div "Built by Sen Mikhalev with: "]
+           [:span [:a {:href "https://github.com/clojure/clojurescript"} "Clojure(Script)"]]
+           [:span ", "]
+           [:span [:a {:href "https://github.com/hashobject/perun"} "Perun"]]
+           [:span ", "]
+           [:span [:a {:href "https://github.com/boot-clj/boot"} "Boot"]]
+           [:span ", "]
+           [:span [:a {:href "https://github.com/noprompt/garden"} "Garden"]]
+           [:span " and "]
+           [:span [:a {:href "https://github.com/plumatic/dommy"} "Dommy"]]]]))

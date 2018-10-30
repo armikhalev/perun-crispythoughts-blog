@@ -124,6 +124,11 @@
     {:color       "#FF9800"
      }]]
 
+  [:footer
+   {:font-size     "small"
+    :text-align    "center"
+    :margin-top    "4em"
+    :margin-bottom "2em"}]
 
   (gsheet/at-media
    {:min-width (u/px 600)}
