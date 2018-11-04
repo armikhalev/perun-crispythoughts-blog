@@ -6,6 +6,7 @@
   (hp/html5 {:lang "en" :itemtype "http://schema.org/Blog"}
          [:head
           (hp/include-css "../index.css")
+          (hp/include-css "../autumn.css")
           [:title (str (:site-title global-meta) " | " (:title post))]
           [:meta {:charset "utf-8"}]
           [:meta {:http-equiv "X-UA-Compatible" :content "IE=edge,chrome=1"}]

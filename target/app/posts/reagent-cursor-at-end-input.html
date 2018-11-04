@@ -3,40 +3,38 @@
 <p>I have input field which has text in it on page load, for example, if I get there by url like this: <code>www.my-site/words?search=awesome</code> then I have _awesome _ in the input field. However, cursor will go to the beginning of the word, not to the end as I would prefer, because usually you delete that word to put a new word for the next search.</p>
 <p>In a <a href="https://reagent-project.github.io/">Reagent</a> app written in <a href="https://clojurescript.org/">Clojurescript</a> I can use excellent interop with Javascript to achieve that. I found one part of the answer on <a href="https://stackoverflow.com/questions/19568041/set-focus-and-cursor-to-end-of-text-input-field-string-w-jquery/19568146#19568146">StackOverflow</a>: Basically by using <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement/setSelectionRange">setSelectionRange()</a> method of <code>HTMLInputElement</code> we move cursor to the end of text by using length of the string as the first argument to the method.</p>
 <p>Another part was to figure out how to get HTMLInputElement on page load. A <a href="https://reagent-project.github.io/">Reagent</a> component is a Clojurescript wrapper around React component, that means we can use React’s lifecycle methods. In this particular case we need <code>componentDidMount()</code> method to move cursor after <code>HTMLInputElement</code> appeared on page. Reagent has <a href="https://github.com/reagent-project/reagent/blob/master/doc/CreatingReagentComponents.md">three forms of components</a>, the third form has access to React’s lifecycle methods. So we have to create a Reagent class by using <code>reagent/create-class</code> where we use <code>:component-did-mount</code> key where we write the main logic of the solution. Here is the code below taken from Reagent docs but with applied solution to the input cursor problem:</p>
-<pre><code class="language-clojure">
-(defn search-field ;; Start input component as usual
-  [placeholder
-   &gt;dis-search-input-entered
-   search-input] ;; These args are not relevant to the problem
+<pre><code class="highlight"><span></span><span class="p">(</span><span class="kd">defn </span><span class="nv">search-field</span> <span class="c1">;; Start input component as usual</span>
+  <span class="p">[</span><span class="nv">placeholder</span>
+   <span class="nv">&gt;dis-search-input-entered</span>
+   <span class="nv">search-input</span><span class="p">]</span> <span class="c1">;; These args are not relevant to the problem</span>
 
-  (let [] ;; Here we create Reagent class
-    (reagent/create-class
-     {:display-name &quot;search-field&quot; ;; Needs a display-name for debugging
+  <span class="p">(</span><span class="k">let </span><span class="p">[]</span> <span class="c1">;; Here we create Reagent class</span>
+    <span class="p">(</span><span class="nf">reagent/create-class</span>
+     <span class="p">{</span><span class="ss">:display-name</span> <span class="s">"search-field"</span> <span class="c1">;; Needs a display-name for debugging</span>
 
-      ;; NOTE: Using 3d reagent form to make cursor go to the end of the input value
-      :component-did-mount
-      (fn [self] 
-        (let [inputLen (-&gt; self
-                          reagent-dom/dom-node ;; get HTMLInputElement
-                          .-value
-                          count)]
-          ;; setSelectionRange is js method
-          (-&gt; self
-              reagent-dom/dom-node ;; get HTMLInputElement
+      <span class="c1">;; NOTE: Using 3d reagent form to make cursor go to the end of the input value</span>
+      <span class="ss">:component-did-mount</span>
+      <span class="p">(</span><span class="k">fn </span><span class="p">[</span><span class="nv">self</span><span class="p">]</span> 
+        <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">inputLen</span> <span class="p">(</span><span class="nb">-&gt; </span><span class="nv">self</span>
+                          <span class="nv">reagent-dom/dom-node</span> <span class="c1">;; get HTMLInputElement</span>
+                          <span class="nv">.-value</span>
+                          <span class="nv">count</span><span class="p">)]</span>
+          <span class="c1">;; setSelectionRange is js method</span>
+          <span class="p">(</span><span class="nb">-&gt; </span><span class="nv">self</span>
+              <span class="nv">reagent-dom/dom-node</span> <span class="c1">;; get HTMLInputElement</span>
 
-              ;; second argument can be any number higher than input length
-              (.setSelectionRange inputLen (* inputLen 2))))) 
+              <span class="c1">;; second argument can be any number higher than input length</span>
+              <span class="p">(</span><span class="nf">.setSelectionRange</span> <span class="nv">inputLen</span> <span class="p">(</span><span class="nb">* </span><span class="nv">inputLen</span> <span class="mi">2</span><span class="p">)))))</span> 
 
-      :reagent-render
-      (fn
-        [placeholder
-         &gt;dis-search-input-entered
-         search-input]
-        [:input
-         {:placeholder placeholder
-          :auto-focus true ;; Gets normal autofocus but puts cursor to beginning of word
-          :value search-input
-          :on-change #(&gt;dis-search-input-entered (-&gt; % .-target .-value))}])})))
-
+      <span class="ss">:reagent-render</span>
+      <span class="p">(</span><span class="nf">fn</span>
+        <span class="p">[</span><span class="nv">placeholder</span>
+         <span class="nv">&gt;dis-search-input-entered</span>
+         <span class="nv">search-input</span><span class="p">]</span>
+        <span class="p">[</span><span class="ss">:input</span>
+         <span class="p">{</span><span class="ss">:placeholder</span> <span class="nv">placeholder</span>
+          <span class="ss">:auto-focus</span> <span class="nv">true</span> <span class="c1">;; Gets normal autofocus but puts cursor to beginning of word</span>
+          <span class="ss">:value</span> <span class="nv">search-input</span>
+          <span class="ss">:on-change</span> <span class="o">#</span><span class="p">(</span><span class="nf">&gt;dis-search-input-entered</span> <span class="p">(</span><span class="nb">-&gt; </span><span class="nv">%</span> <span class="nv">.-target</span> <span class="nv">.-value</span><span class="p">))}])})))</span>
 </code></pre>
-</main><h2><a href="/">Back Home</a></h2></body></html>
+</main><h2><a class="back-home" href="/">↢ Back Home</a></h2><footer><div>Built by Sen Mikhalev with: </div><span><a href="https://github.com/clojure/clojurescript">Clojure(Script)</a></span><span>, </span><span><a href="https://github.com/hashobject/perun">Perun</a></span><span>, </span><span><a href="https://github.com/boot-clj/boot">Boot</a></span><span>, </span><span><a href="https://github.com/noprompt/garden">Garden</a></span><span> and </span><span><a href="https://github.com/plumatic/dommy">Dommy</a></span></footer></body></html>
