@@ -8,11 +8,15 @@ tags:
   - Reagent
 ---
 ### Here is a problem:
-I have input field which has text in it on page load, for example, if I get there by url like this: `www.my-site/words?search=awesome` then I have _awesome _ in the input field.
+I have input field which has text in it on page load, for example, if I get there by url like this: `www.my-site/words?search=awesome` then I have _awesome_ in the input field.
 However, cursor will go to the beginning of the word, not to the end as I would prefer, because usually you delete that word to put a new word for the next search.
 
+<br/>
+
 In a [Reagent](https://reagent-project.github.io/) app written in [Clojurescript](https://clojurescript.org/) I can use excellent interop with Javascript to achieve that.
-I found one part of the answer on [StackOverflow](https://stackoverflow.com/questions/19568041/set-focus-and-cursor-to-end-of-text-input-field-string-w-jquery/19568146#19568146): Basically by using [setSelectionRange()](https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement/setSelectionRange) method of `HTMLInputElement` we move cursor to the end of text by using length of the string as the first argument to the method.
+I found one part of the answer on [StackOverflow](https://stackoverflow.com/questions/19568041/set-focus-and-cursor-to-end-of-text-input-field-string-w-jquery/19568146#19568146). Basically by using [setSelectionRange()](https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement/setSelectionRange) method of `HTMLInputElement` we move cursor to the end of text by using length of the string as the first argument to the method.
+
+<br/>
 
 Another part was to figure out how to get HTMLInputElement on page load.
 A [Reagent](https://reagent-project.github.io/) component is a Clojurescript wrapper around React component, that means we can use React’s lifecycle methods.

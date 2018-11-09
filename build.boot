@@ -1,6 +1,6 @@
 (set-env!
 	:source-paths #{"src" "content"}
-  :resource-paths  #{"highlight-css"}
+  :resource-paths  #{"highlight-css" "images"}
   :dependencies '[[perun "0.4.2-SNAPSHOT" :scope "test"]
                   [adzerk/boot-cljs "2.1.4" :scope "test"]
                   [pandeiro/boot-http "0.8.3" :exclusions [org.clojure/clojure]]

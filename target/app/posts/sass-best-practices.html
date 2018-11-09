@@ -1,45 +1,107 @@
 <!DOCTYPE html>
-<html itemtype="http://schema.org/Blog" lang="en"><head><link href="../index.css" rel="stylesheet" type="text/css"><title>CT | SASS – best practices</title><meta charset="utf-8"><meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible"><meta content="width=device-width, initial-scale=1.0, user-scalable=no" name="viewport"><link href="https://fonts.googleapis.com/css?family=Fira+Sans" rel="stylesheet"></head><body class="main"><h1 class="main-header">SASS – best practices</h1><main class="content"><p>SASS is a wonderful tool for managing your CSS files as it gives us variables, mixins and all other goodies. Here is my way of utilizing SASS features in the most effective way. I don’t claim it is the only way but it is a good start for anyone who wants to manage styles wisely.</p>
+<html itemtype="http://schema.org/Blog" lang="en"><head><link href="../index.css" rel="stylesheet" type="text/css"><link href="../autumn.css" rel="stylesheet" type="text/css"><title>CT | SASS – best practices</title><meta charset="utf-8"><meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible"><meta content="width=device-width, initial-scale=1.0, user-scalable=no" name="viewport"><link href="https://fonts.googleapis.com/css?family=Fira+Sans" rel="stylesheet"></head><body class="main"><h1 class="main-header">SASS – best practices</h1><main class="content"><p><a href="https://sass-lang.com/"> SASS </a> is a wonderful tool for managing your CSS files as it gives us variables, mixins and all other goodies. Here is my way of utilizing SASS features in the most effective way. I don’t claim it is the only way but it is a good start for anyone who wants to manage styles wisely.</p>
+<br />
 <p>Here we go:</p>
-<p>1) Having just one css file after compiling means only one call to the server, which gives us the best performance and lightness of our app. So there should be just one non-partial .sass/.scss file, where I put all the imports from partial files. Notice that in index.scss file there shouldn’t be anything except @imports;</p>
+<ol>
+<li>Having just one css file after compiling means only one call to the server, which gives us the best performance and lightness of our app. So there should be just one non-partial <code>.sass/.scss</code> file, where I put all the imports from partial files. Notice that in <code>index.scss</code> file there shouldn’t be anything except <code>@imports</code>;</li>
+</ol>
+<br />
 <p>For example, here is the file tree structure of a simple app:</p>
-<p>~ index.scss ~ _app.scss ~ _page1.scss ~ _page2.scss</p>
+<ul>
+<li>index.scss</li>
+<li>_app.scss</li>
+<li>_page1.scss</li>
+<li>_page2.scss</li>
+</ul>
 <p>/ components</p>
-<p>~ _header.scss ~ _sider.scss ~ _nav-bar.scss ~ _components-base.scss</p>
+<ul>
+<li>_header.scss</li>
+<li>_sider.scss</li>
+<li>_nav-bar.scss</li>
+<li>_components-base.scss</li>
+</ul>
 <p>/ grid</p>
-<p>~ _desktop-grid.scss ~ _mobile-grid.scss ~ _grid-base.scss</p>
-<p>As you see all files except index.scss are partials (i.e. with underscore _ as the first char of the name). All folders have a “base” file where all the files of that folder are imported, then that _base.scss file is imported into index.scss file. Thus we can create whole libraries and just put one import into index file to import everything we need. That means modularity and maintanability. Also, this approach effectively eliminates the bloat from the libraries we create in this way due to rules of SASS partials compilation, which doesn’t compile partial files into separate css files. So in the final compiled index.css file you will see only the classes you use! How awesome is that!!</p>
-<p>2) In my html files (or whatever compiles to it in your framework) I have only one class for each element.</p>
+<ul>
+<li>_desktop-grid.scss</li>
+<li>_mobile-grid.scss</li>
+<li>_grid-base.scss</li>
+</ul>
+<br />
+<p>As you see all files except <code>index.scss</code> are partials <em>(i.e. with underscore _ as the first char of the name)</em>. All folders have a “base” file where all the files of that folder are imported, then that _base.scss file is imported into index.scss file. Thus we can create whole libraries and just put one import into index file to import everything we need. That means modularity and maintanability. Also, this approach effectively eliminates the bloat from the libraries we create in this way due to rules of SASS partials compilation, which doesn’t compile partial files into separate css files. So in the final compiled index.css file you will see only the classes you use! How awesome is that!!</p>
+<br />
+<ol>
+<li>In my html files (or whatever compiles to it in your framework) I have only one class for each element.</li>
+</ol>
 <p>Example:</p>
-<div class="navbar">
-<div class="navbar-button-group">
-<div class="navbar-button"> </div>
-</div>
-</div>
+<pre><code class="highlight"><span></span><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">"navbar"</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">"navbar-button-group"</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">"navbar-button"</span><span class="p">&gt;</span> <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</code></pre>
 <p>I hold some naming conventions for the readability. The highest parent element has class name of the page or component, it is one word for class, all the children are two or three words for a class, they can be as descriptive as needed, since no other class names are used for an element.</p>
-<p>3) All the styling managment which is usually done by adding classes to html elements is abolished by the SASS mixins. I create as many mixins as I need/want and then just “@include” them into the classes, thus the only link between html element and css is the single class name.</p>
+<ol>
+<li>All the styling managment which is usually done by adding classes to html elements is abolished by the SASS mixins. I create as many mixins as I need/want and then just <code>@include</code> them into the classes, thus the only link between html element and css is the single class name.</li>
+</ol>
 <p>Example:</p>
-<p>~ _mobile-grid.scss:</p>
-<p>@mixin row {</p>
-<p>display: -webkit-box; display: -webkit-flex; display: -ms-flexbox; display: flex; -webkit-flex-wrap: wrap; -ms-flex-wrap: wrap; flex-wrap: wrap; }</p>
-<p>@mixin center-items-vertical {</p>
-<p>align-items: center; margin-top:15px; margin-bottom: 15px; }</p>
-<p>@mixin justify-content($mode) {</p>
-<p>justify-content: $mode; }</p>
-<p>@mixin col-1 {</p>
-<p>width: 8.333333%; }</p>
-<p>@mixin col-2 {</p>
-<p>width: 16.666667%; }</p>
-<p>~ _page1.scss:</p>
-<p>.page1-row {</p>
-<p>@include row; @include center-items-vertical; @include justify-content(space-between); }</p>
-<p>.page1-label {</p>
-<p>@include col-1; }</p>
-<p>Notice that, as I mentioned already, col-2 will not be compiled to index.css file, because it is not used! It is a great way to reduce bloat in our styles.</p>
-<p>4) Media queries can be also packed into mixins and imported in whatever files you need.</p>
+<ul>
+<li>_mobile-grid.scss:</li>
+</ul>
+<pre><code class="highlight"><span></span><span class="k">@mixin</span> <span class="nt">row</span> <span class="p">{</span>
+
+  <span class="nt">display</span><span class="o">:</span> <span class="nt">-webkit-box</span><span class="o">;</span>
+  <span class="nt">display</span><span class="o">:</span> <span class="nt">-webkit-flex</span><span class="o">;</span>
+  <span class="nt">display</span><span class="o">:</span> <span class="nt">-ms-flexbox</span><span class="o">;</span>
+  <span class="nt">display</span><span class="o">:</span> <span class="nt">flex</span><span class="o">;</span>
+  <span class="nt">-webkit-flex-wrap</span><span class="o">:</span> <span class="nt">wrap</span><span class="o">;</span>
+  <span class="nt">-ms-flex-wrap</span><span class="o">:</span> <span class="nt">wrap</span><span class="o">;</span>
+  <span class="nt">flex-wrap</span><span class="o">:</span> <span class="nt">wrap</span><span class="o">;</span>
+<span class="p">}</span>
+
+<span class="k">@mixin</span> <span class="nt">center-items-vertical</span> <span class="p">{</span>
+
+  <span class="nt">align-items</span><span class="o">:</span> <span class="nt">center</span><span class="o">;</span>
+  <span class="nt">margin-top</span><span class="nd">:15px</span><span class="o">;</span>
+  <span class="nt">margin-bottom</span><span class="o">:</span> <span class="nt">15px</span><span class="o">;</span>
+<span class="p">}</span>
+
+<span class="k">@mixin</span> <span class="nt">justify-content</span><span class="o">($</span><span class="nt">mode</span><span class="o">)</span> <span class="p">{</span>
+
+  <span class="nt">justify-content</span><span class="o">:</span> <span class="o">$</span><span class="nt">mode</span><span class="o">;</span>
+<span class="p">}</span>
+
+<span class="k">@mixin</span> <span class="nt">col-1</span> <span class="p">{</span>
+
+  <span class="nt">width</span><span class="o">:</span> <span class="nt">8</span><span class="nc">.333333</span><span class="o">%;</span>
+<span class="p">}</span>
+
+<span class="k">@mixin</span> <span class="nt">col-2</span> <span class="p">{</span>
+
+  <span class="nt">width</span><span class="o">:</span> <span class="nt">16</span><span class="nc">.666667</span><span class="o">%;</span>
+<span class="p">}</span>
+</code></pre>
+<ul>
+<li>_page1.scss:</li>
+</ul>
+<pre><code class="highlight"><span></span><span class="nc">.page1-row</span> <span class="p">{</span>
+  <span class="o">@</span><span class="n">include</span> <span class="n">row</span><span class="p">;</span>
+  <span class="o">@</span><span class="n">include</span> <span class="nb">center</span><span class="o">-</span><span class="n">items</span><span class="o">-</span><span class="n">vertical</span><span class="p">;</span>
+  <span class="o">@</span><span class="n">include</span> <span class="nb">justify</span><span class="o">-</span><span class="nb">content</span><span class="p">(</span><span class="n">space</span><span class="o">-</span><span class="n">between</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="nc">.page1-label</span> <span class="p">{</span>
+  <span class="o">@</span><span class="n">include</span> <span class="n">col</span><span class="m">-1</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre>
+<p>Notice that, as I mentioned already, <code>col-2</code> will not be compiled to <code>index.css</code> file, because it is not used! It is a great way to reduce bloat in our styles.</p>
+<ol>
+<li>Media queries can be also packed into mixins and imported in whatever files you need.</li>
+</ol>
 <p>If you want to see this approach implemented in a real project go to my github page:</p>
-<p><a href="https://github.com/armikhalev/melasi_frontend_ember/tree/master/app/styles">https://github.com/armikhalev/melasi_frontend_ember/tree/master/app/styles</a> or</p>
-<p><a href="https://github.com/armikhalev/artist-website-react/tree/master/artist-website/src/styles/sass">https://github.com/armikhalev/artist-website-react/tree/master/artist-website/src/styles/sass</a></p>
+<p><a href="https://github.com/armikhalev/melasi_frontend_ember/tree/master/app/styles">here</a> or</p>
+<p><a href="https://github.com/armikhalev/artist-website-react/tree/master/artist-website/src/styles/sass">here</a></p>
+<br />
 <p>This approach is great for functional programming style (think React.js, Vue.js) as it uses composition instead of inheritance.</p>
+<br />
 <p>Happy coding!</p>
 </main><h2><a class="back-home" href="/">↢ Back Home</a></h2><footer><div>Built by Sen Mikhalev with: </div><span><a href="https://github.com/clojure/clojurescript">Clojure(Script)</a></span><span>, </span><span><a href="https://github.com/hashobject/perun">Perun</a></span><span>, </span><span><a href="https://github.com/boot-clj/boot">Boot</a></span><span>, </span><span><a href="https://github.com/noprompt/garden">Garden</a></span><span> and </span><span><a href="https://github.com/plumatic/dommy">Dommy</a></span></footer></body></html>

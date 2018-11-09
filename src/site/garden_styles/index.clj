@@ -28,11 +28,12 @@
     {:color "#000000db"}]]
 
   [:.main
-   {:margin "0px 10%"
+   {:margin "0px 5%"
     :font-family "Fira Sans"}
 
    [:a
-    {:text-decoration "none"}
+    {:text-decoration "none"
+     :color "#F44336"}
 
     [:a.back-home
      {:color  "darkgoldenrod"}]]]
@@ -43,6 +44,16 @@
 
   [:.main-header
    {:color "#bb883d"}]
+
+  [:p
+   {:margin 0}]
+
+  [:img
+   {:width "100%"
+    :margin-bottom "1em"}]
+
+  [:h3
+   {:text-align "center"}]
 
   [:.text-center
    {:text-align "center"}]
@@ -132,6 +143,9 @@
 
   (gsheet/at-media
    {:min-width (u/px 600)}
+   [:.main
+    {:margin "0px 25%"
+     :font-family "Fira Sans"}]
 
    [:button
     [:&#sort-by-date
