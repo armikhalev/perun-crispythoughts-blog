@@ -142,7 +142,7 @@
     :margin-bottom "2em"}]
 
   (gsheet/at-media
-   {:min-width (u/px 600)}
+   {:min-width (u/px 800)}
    [:.main
     {:margin "0px 25%"
      :font-family "Fira Sans"}]
